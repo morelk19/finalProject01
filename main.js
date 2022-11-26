@@ -155,4 +155,8 @@ function setBoad(classCoords, querSel){
         setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel);
     }
 
+};
+
+function move(piece, location){
+    
 }
