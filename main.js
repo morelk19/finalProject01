@@ -1,7 +1,33 @@
 const gameArea = document.querySelector("#gameArea");
 
-
 createBoard();
+createEventListeners();
+
+
+
+
+
+
+function createEventListeners(){
+    const pieces = document.querySelectorAll("#gameArea img");
+    const squares = document.querySelectorAll(`#gameArea div`);
+
+
+
+    const buttonPressed = e => {
+        console.log(e.target.id);
+        console.log(e.target.classList);  // Get ID of Clicked Element
+      }
+
+    for (let piece of pieces) {
+        piece.addEventListener("click", buttonPressed);
+      }
+    for (let square of squares) { 
+        square.addEventListener("click", buttonPressed);
+    }
+
+}
+
 
 
 function createBoard(){
@@ -21,7 +47,7 @@ for (var i = 1; i < 9; i++) {
         } else {
             c.classList.add("black");
         }
-        c.setAttribute(`id`, `${i},${j}`);
+
         let column = '';
         let row  = '';
         if(i === 1){
@@ -60,6 +86,7 @@ for (var i = 1; i < 9; i++) {
         }
 
        c.classList.add(`${row},${column}`);
+       c.classList.add(`${i},${j}`);
   
         r.appendChild(c);
         setBoad(`${i},${j}`, c);   
@@ -75,13 +102,14 @@ function getCoord(classCoords){
     return coords;
 }
 
-function setImage(src, width, height, alt, imgQuerySelector) {
+function setImage(src, width, height, alt, imgQuerySelector, coords, color) {
     var img = document.createElement("img");
     img.src = src;
     img.width = width;
     img.height = height;
-    img.classList.add(`pieces`);
+    img.setAttribute(`id`, `${coords}`);
     img.alt = alt;
+    img.classList.add(`${color}`);
 
     // This next line will just add it to the <body> tag
     imgQuerySelector.appendChild(img);
@@ -90,69 +118,69 @@ function setBoad(classCoords, querSel){
     let coords = getCoord(classCoords);
 
     if(coords[0] === "1" && coords[1] ==="1"){
-        setImage("images/blackRook.jpeg", 20, 20, "black rook", querSel);
+        setImage("images/blackRook.jpeg", 20, 20, "black rook", querSel, classCoords, `black`);
     }else if(coords[0] === "1" && coords[1] ==="2"){
-        setImage("images/blackKnight.jpeg", 20, 20, "black knight", querSel);
+        setImage("images/blackKnight.jpeg", 20, 20, "black knight", querSel, classCoords, `black`);
     }else if(coords[0] === "1" && coords[1] ==="3"){
-        setImage("images/blackBishop.jpeg", 20, 20, "black bishop", querSel);
+        setImage("images/blackBishop.jpeg", 20, 20, "black bishop", querSel, classCoords, `black`);
     }else if(coords[0] === "1" && coords[1] ==="4"){
-        setImage("images/blackQueen.jpeg", 20, 20, "black queen", querSel);
+        setImage("images/blackQueen.jpeg", 20, 20, "black queen", querSel, classCoords, `black`);
     }else if(coords[0] === "1" && coords[1] ==="5"){
-        setImage("images/blackKing.jpeg", 20, 20, "black king", querSel);
+        setImage("images/blackKing.jpeg", 20, 20, "black king", querSel, classCoords, `black`);
     }else if(coords[0] === "1" && coords[1] ==="6"){
-        setImage("images/blackBishop.jpeg", 20, 20, "black bishop", querSel);
+        setImage("images/blackBishop.jpeg", 20, 20, "black bishop", querSel, classCoords, `black`);
     }else if(coords[0] === "1" && coords[1] ==="7"){
-    setImage("images/blackKnight.jpeg", 20, 20, "black knight", querSel);
+    setImage("images/blackKnight.jpeg", 20, 20, "black knight", querSel, classCoords, `black`);
     }else if(coords[0] === "1" && coords[1] ==="8"){
-        setImage("images/blackRook.jpeg", 20, 20, "black rook", querSel);
+        setImage("images/blackRook.jpeg", 20, 20, "black rook", querSel, classCoords, `black`);
     }else if(coords[0] === "2" && coords[1] ==="1"){
-        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel);
+        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel, classCoords, `black`);
     }else if(coords[0] === "2" && coords[1] ==="2"){
-        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel);
+        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel, classCoords, `black`);
     }else if(coords[0] === "2" && coords[1] ==="3"){
-        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel);
+        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel, classCoords, `black`);
     }else if(coords[0] === "2" && coords[1] ==="4"){
-        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel);
+        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel, classCoords, `black`);
     }else if(coords[0] === "2" && coords[1] ==="5"){
-        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel);
+        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel, classCoords, `black`);
     }else if(coords[0] === "2" && coords[1] ==="6"){
-        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel);
+        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel, classCoords, `black`);
     }else if(coords[0] === "2" && coords[1] ==="7"){
-    setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel);
+    setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel, classCoords, `black`);
     }else if(coords[0] === "2" && coords[1] ==="8"){
-        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel);
+        setImage("images/blackPawn.jpeg", 20, 20, "black pawn", querSel, classCoords, `black`);
     }else if(coords[0] === "8" && coords[1] ==="1"){
-        setImage("images/whiteRook.jpeg", 20, 20, "white rook", querSel);
+        setImage("images/whiteRook.jpeg", 20, 20, "white rook", querSel, classCoords, `white`);
     }else if(coords[0] === "8" && coords[1] ==="2"){
-        setImage("images/whiteKnight.jpeg", 20, 20, "white knight", querSel);
+        setImage("images/whiteKnight.jpeg", 20, 20, "white knight", querSel, classCoords, `white`);
     }else if(coords[0] === "8" && coords[1] ==="3"){
-        setImage("images/whiteBishop.jpeg", 20, 20, "white bishop", querSel);
+        setImage("images/whiteBishop.jpeg", 20, 20, "white bishop", querSel, classCoords, `white`);
     }else if(coords[0] === "8" && coords[1] ==="4"){
-        setImage("images/whiteQueen.jpeg", 20, 20, "white queen", querSel);
+        setImage("images/whiteQueen.jpeg", 20, 20, "white queen", querSel, classCoords, `white`);
     }else if(coords[0] === "8" && coords[1] ==="5"){
-        setImage("images/whiteKing.jpeg", 20, 20, "white king", querSel);
+        setImage("images/whiteKing.jpeg", 20, 20, "white king", querSel, classCoords, `white`);
     }else if(coords[0] === "8" && coords[1] ==="6"){
-        setImage("images/whiteBishop.jpeg", 20, 20, "white bishop", querSel);
+        setImage("images/whiteBishop.jpeg", 20, 20, "white bishop", querSel, classCoords, `white`);
     }else if(coords[0] === "8" && coords[1] ==="7"){
-    setImage("images/whiteKnight.jpeg", 20, 20, "white knight", querSel);
+    setImage("images/whiteKnight.jpeg", 20, 20, "white knight", querSel, classCoords, `white`);
     }else if(coords[0] === "8" && coords[1] ==="8"){
-        setImage("images/whiteRook.jpeg", 20, 20, "white rook", querSel);
+        setImage("images/whiteRook.jpeg", 20, 20, "white rook", querSel, classCoords, `white`);
     }else if(coords[0] === "7" && coords[1] ==="1"){
-        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel);
+        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel, classCoords, `white`);
     }else if(coords[0] === "7" && coords[1] ==="2"){
-        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel);
+        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel, classCoords, `white`);
     }else if(coords[0] === "7" && coords[1] ==="3"){
-        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel);
+        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel, classCoords, `white`);
     }else if(coords[0] === "7" && coords[1] ==="4"){
-        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel);
+        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel, classCoords, `white`);
     }else if(coords[0] === "7" && coords[1] ==="5"){
-        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel);
+        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel, classCoords, `white`);
     }else if(coords[0] === "7" && coords[1] ==="6"){
-        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel);
+        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel, classCoords, `white`);
     }else if(coords[0] === "7" && coords[1] ==="7"){
-    setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel);
+    setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel, classCoords, `white`);
     }else if(coords[0] === "7" && coords[1] ==="8"){
-        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel);
+        setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel, classCoords, `white`);
     }
 
 };

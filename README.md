@@ -54,22 +54,3 @@ The previous TODO statement would look more like this now:
 After doing this, you should have a working Hacker News clone!
 
 ## Stretch Goals
-
-#### Responsiveness
-Your site should be responsive (mobile friendly) and use at least one CSS media query to change style rules based on screen size
-
-#### Comments
-
-Add a button to each story "View comments". When clicked, a section below the
-story should appear that contains the story's comments. Once again, you'll need
-to review the API documentation to see how this could be done.
-
-#### Tab Layout
-
-We've got stories, great! But what about the other tabs on HackerNews (ask, show, jobs).
-Lets add the "ask" section. These are essentially a different set of stories that are all
-questions.
-
-Add two buttons in the header of your page, "stories" and "ask". Clicking between them
-should toggle your page between showing the top stories and the top "ask" stories (available
-at a different API endpoint).
