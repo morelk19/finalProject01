@@ -5,19 +5,23 @@ createBoard();
 
 
 function createBoard(){
-    var table = document.createElement("table");
+    var table = document.createElement("div");
+    table.classList.add(`container`);
 for (var i = 1; i < 9; i++) {
-    var tr = document.createElement('tr');
+    var r = document.createElement("div");
+    r.classList.add(`row`);
+
 
     for (var j = 1; j < 9; j++) {
 
-        var td = document.createElement('td');
+        var c = document.createElement("div");
+        c.classList.add(`col`);
         if (i%2 == j%2) {
-            td.className = "white";
+            c.classList.add("white");
         } else {
-            td.className = "black";
+            c.classList.add("black");
         }
-        td.setAttribute(`id`, `${i},${j}`);
+        c.setAttribute(`id`, `${i},${j}`);
         let column = '';
         let row  = '';
         if(i === 1){
@@ -55,15 +59,13 @@ for (var i = 1; i < 9; i++) {
             column = 'H';
         }
 
-       td.classList.add(`${row},${column}`);
+       c.classList.add(`${row},${column}`);
   
-
-        tr.appendChild(td);
-        setBoad(`${i},${j}`, td);   
+        r.appendChild(c);
+        setBoad(`${i},${j}`, c);   
        
-        
     }
-    table.appendChild(tr);
+    table.appendChild(r);
 }
 gameArea.appendChild(table);
 }
@@ -122,7 +124,7 @@ function setBoad(classCoords, querSel){
     }else if(coords[0] === "8" && coords[1] ==="1"){
         setImage("images/whiteRook.jpeg", 20, 20, "white rook", querSel);
     }else if(coords[0] === "8" && coords[1] ==="2"){
-        setImage("images/whitekKnight.jpeg", 20, 20, "white knight", querSel);
+        setImage("images/whiteKnight.jpeg", 20, 20, "white knight", querSel);
     }else if(coords[0] === "8" && coords[1] ==="3"){
         setImage("images/whiteBishop.jpeg", 20, 20, "white bishop", querSel);
     }else if(coords[0] === "8" && coords[1] ==="4"){
