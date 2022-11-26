@@ -1,0 +1,42 @@
+.app {
+    display: flex;
+    height: 500px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.headings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .white{
+    background-color: white;
+  }
+
+  .black{
+    background-color: black;
+  }
+
+  .pieces{
+    display: inline;
+    z-index: -1;
+    position:relative;
+  }
+
+  table{
+    border: solid black;
+  }
+
+
+td
+{
+ width: 45px;
+ height:45px;
+ float:left;
+ text-align: center;
+}
+
+
