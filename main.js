@@ -1,4 +1,7 @@
 const gameArea = document.querySelector("#gameArea");
+let piece = '';
+let pieceSelected = false;
+let whiteTurn = true;
 
 createBoard();
 createEventListeners();
@@ -15,8 +18,16 @@ function createEventListeners(){
 
 
     const buttonPressed = e => {
-        console.log(e.target.id);
-        console.log(e.target.classList);  // Get ID of Clicked Element
+
+        piece = e.target.src;
+        console.log(piece);
+        if(piece === undefined){
+            pieceSelected = false;
+        }else{
+            pieceSelected = true;
+        }
+        console.log(pieceSelected);
+
       }
 
     for (let piece of pieces) {
