@@ -1,0 +1,25 @@
+{
+  "name": "finalproject01",
+  "version": "1.0.0",
+  "description": "In this project, I'll be recreating the classic game of chess. It will be a two player game.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morelk19/finalProject01.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/morelk19/finalProject01/issues"
+  },
+  "homepage": "https://github.com/morelk19/finalProject01#readme",
+  "dependencies": {
+    "chess.js": "^1.0.0-alpha.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
+}
