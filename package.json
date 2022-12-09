@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/morelk19/finalProject01#readme",
   "dependencies": {
+    "@chrisoakman/chessboardjs": "^1.0.0",
+    "ch": "^0.3.0",
     "chess.js": "^1.0.0-alpha.0"
   },
   "devDependencies": {

@@ -7,87 +7,79 @@ var ch = require('chess.js');
 const chess = new ch.Chess()
 
 
-while (!chess.isGameOver()) {
-  const moves = chess.moves()
-  const move = moves[Math.floor(Math.random() * moves.length)]
-  chess.move(move)
+
+
+var board = null
+var game = new ch.Chess()
+
+
+function onDragStart (source, piece, position, orientation) {
+  // do not pick up pieces if the game is over
+  if (game.game_over()) return false
+
+  // only pick up pieces for the side to move
+  if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+      (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+    return false
+  }
 }
 
-// var board = null
-// var game = new Chess()
+function onDrop (source, target) {
+  // see if the move is legal
+  var move = game.move({
+    from: source,
+    to: target,
+    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+  })
 
+  // illegal move
+  if (move === null) return 'snapback'
 
-// function onDragStart (source, piece, position, orientation) {
-//   // do not pick up pieces if the game is over
-//   if (game.game_over()) return false
+  updateStatus()
+}
 
-//   // only pick up pieces for the side to move
-//   if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-//       (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
-//     return false
-//   }
-// }
+// update the board position after the piece snap
+// for castling, en passant, pawn promotion
+function onSnapEnd () {
+  board.position(game.fen())
+}
 
-// function onDrop (source, target) {
-//   // see if the move is legal
-//   var move = game.move({
-//     from: source,
-//     to: target,
-//     promotion: 'q' // NOTE: always promote to a queen for example simplicity
-//   })
+function updateStatus () {
+  var status = ''
 
-//   // illegal move
-//   if (move === null) return 'snapback'
+  var moveColor = 'White'
+  if (game.turn() === 'b') {
+    moveColor = 'Black'
+  }
 
-//   updateStatus()
-// }
+  // checkmate?
+  if (game.in_checkmate()) {
+    status = 'Game over, ' + moveColor + ' is in checkmate.'
+  }
 
-// // update the board position after the piece snap
-// // for castling, en passant, pawn promotion
-// function onSnapEnd () {
-//   board.position(game.fen())
-// }
+  // draw?
+  else if (game.in_draw()) {
+    status = 'Game over, drawn position'
+  }
 
-// function updateStatus () {
-//   var status = ''
+  // game still on
+  else {
+    status = moveColor + ' to move'
 
-//   var moveColor = 'White'
-//   if (game.turn() === 'b') {
-//     moveColor = 'Black'
-//   }
+    // check?
+    if (game.in_check()) {
+      status += ', ' + moveColor + ' is in check'
+    }
+  }
+}
 
-//   // checkmate?
-//   if (game.in_checkmate()) {
-//     status = 'Game over, ' + moveColor + ' is in checkmate.'
-//   }
+var config = {
+  draggable: true,
+  position: 'start',
+  onDragStart: onDragStart,
+  onDrop: onDrop,
+  onSnapEnd: onSnapEnd
+}
+board = Chessboard('myBoard', config)
 
-//   // draw?
-//   else if (game.in_draw()) {
-//     status = 'Game over, drawn position'
-//   }
-
-//   // game still on
-//   else {
-//     status = moveColor + ' to move'
-
-//     // check?
-//     if (game.in_check()) {
-//       status += ', ' + moveColor + ' is in check'
-//     }
-//   }
-
-//   $status.html(status)
-//   $fen.html(game.fen())
-//   $pgn.html(game.pgn())
-// }
-
-// var config = {
-//   draggable: true,
-//   position: 'start',
-//   onDragStart: onDragStart,
-//   onDrop: onDrop,
-//   onSnapEnd: onSnapEnd
-// }
-// board = Chessboard('myBoard', config)
-
-// updateStatus()
+updateStatus()
