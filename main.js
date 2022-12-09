@@ -15,7 +15,7 @@ var game = new ch.Chess()
 
 function onDragStart (source, piece, position, orientation) {
   // do not pick up pieces if the game is over
-  if (game.game_over()) return false
+  if (game.isGameOver()) return false
 
   // only pick up pieces for the side to move
   if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
@@ -53,12 +53,12 @@ function updateStatus () {
   }
 
   // checkmate?
-  if (game.in_checkmate()) {
+  if (game.inCheckmate()) {
     status = 'Game over, ' + moveColor + ' is in checkmate.'
   }
 
   // draw?
-  else if (game.in_draw()) {
+  else if (game.isDraw()) {
     status = 'Game over, drawn position'
   }
 
@@ -67,7 +67,7 @@ function updateStatus () {
     status = moveColor + ' to move'
 
     // check?
-    if (game.in_check()) {
+    if (game.inCheck()) {
       status += ', ' + moveColor + ' is in check'
     }
   }
