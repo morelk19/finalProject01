@@ -54,11 +54,16 @@ for(let square of board){
         from: dragged.id.toString(),
         to: event.target.classList[3].toString(),
       })
-      console.log(game.board());
 
       if (move === null) return 'snapback'
     dragged.parentNode.removeChild(dragged);
+    if(event.target.hasChildNodes()){
+      event.target.removeChild(event.target.firstChild);
+    }
     event.target.appendChild(dragged);
+    dragged.id = event.target.classList[3].toString();
+    console.log(dragged.id);
+
     }
   });
 }
