@@ -19,7 +19,8 @@
   "dependencies": {
     "@chrisoakman/chessboardjs": "^1.0.0",
     "ch": "^0.3.0",
-    "chess.js": "^1.0.0-alpha.0"
+    "chess.js": "^1.0.0-alpha.0",
+    "underscore": "^1.13.6"
   },
   "devDependencies": {
     "typescript": "^4.9.4"
