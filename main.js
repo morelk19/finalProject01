@@ -1,5 +1,6 @@
 
 const gameArea = document.querySelector("#gameArea");
+const status = document.querySelector(`#status`);
 var ch = require('chess.js');
 
 
@@ -62,6 +63,7 @@ for(let square of board){
     event.target.appendChild(dragged);
     dragged.id = event.target.classList[3].toString();
     console.log(dragged.id);
+    status.innerHTML = updateStatus();
 
     }
   });
@@ -227,6 +229,34 @@ function setBoad(classCoords, querSel, chessCoords){
       setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel, classCoords, `white`, chessCoords);
     }
   };
-  function move(piece, location){
-      
-  }
+
+function updateStatus () {
+    var status = ''
+  
+    var moveColor = 'White'
+    if (game.turn() === 'b') {
+      moveColor = 'Black'
+    }
+  
+    // checkmate?
+    if (game.isCheckmate()) {
+      status = 'Game over, ' + moveColor + ' is in checkmate.'
+    }
+  
+    // draw?
+    else if (game.isDraw()) {
+      status = 'Game over, drawn position'
+    }
+  
+    // game still on
+    else {
+      status = moveColor + ' to move'
+  
+      // check?
+      if (game.inCheck()) {
+        status += ', ' + moveColor + ' is in check'
+      }
+    }
+    
+    return status;
+}

@@ -1,6 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 
 const gameArea = document.querySelector("#gameArea");
+const status = document.querySelector(`#status`);
 var ch = require('chess.js');
 
 
@@ -63,6 +64,7 @@ for(let square of board){
     event.target.appendChild(dragged);
     dragged.id = event.target.classList[3].toString();
     console.log(dragged.id);
+    status.innerHTML = updateStatus();
 
     }
   });
@@ -228,9 +230,37 @@ function setBoad(classCoords, querSel, chessCoords){
       setImage("images/whitePawn.jpeg", 20, 20, "white pawn", querSel, classCoords, `white`, chessCoords);
     }
   };
-  function move(piece, location){
-      
-  }
+
+function updateStatus () {
+    var status = ''
+  
+    var moveColor = 'White'
+    if (game.turn() === 'b') {
+      moveColor = 'Black'
+    }
+  
+    // checkmate?
+    if (game.isCheckmate()) {
+      status = 'Game over, ' + moveColor + ' is in checkmate.'
+    }
+  
+    // draw?
+    else if (game.isDraw()) {
+      status = 'Game over, drawn position'
+    }
+  
+    // game still on
+    else {
+      status = moveColor + ' to move'
+  
+      // check?
+      if (game.inCheck()) {
+        status += ', ' + moveColor + ' is in check'
+      }
+    }
+    
+    return status;
+}
 },{"chess.js":2}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
